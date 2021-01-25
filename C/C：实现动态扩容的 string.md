@@ -283,3 +283,4 @@ int main() {
 }
 ```
 
+全部代码见文件（mystring.h, mystring.c, mystring_test.c)

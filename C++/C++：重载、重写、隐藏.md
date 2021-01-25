@@ -29,16 +29,14 @@ int test(double b, int a);
 6. 重写函数的访问修饰符可以不同。尽管 virtual 是 private 的，派生类中重写改写为 public，protected 也是可以的
 
 ```c++
-class Base
-{
+class Base {
 public:
     virtual void test(int a) { 
         cout << "this is base\n"; 	 
     }
 };
 
-class Sub : public Base
-{
+class Derived : public Base {
 public:
     void test(int a) { 
         cout << "this is Base overwrite function\n"; 
@@ -57,8 +55,7 @@ public:
 5. 参数相同，但是基类函数没有 virtual 关键字。此时，基类的函数被隐藏
 
 ```c++
-class Base
-{
+class Base {
 public:
     virtual void test(int a) {  // 有 virtual 关键字，参数列表不同 
         cout << "this is base there are different parameters with virtual" << endl;
@@ -71,8 +68,7 @@ public:
     }
 };
 
-class Sub : public Base
-{
+class Derived : public Base {
 public:
     void test() {
         cout << "this is Ship there are different parameters with virtual cover" << endl;

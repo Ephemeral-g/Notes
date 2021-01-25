@@ -261,4 +261,5 @@ new[] 分配的内存只能由 delete[] 释放。如果由 delete 释放会崩�
 
 ### 五、内存泄漏检查器
 
-详见 LeakDetector 文件           
+详见 LeakDetector(h, cpp, test) 文件           
+

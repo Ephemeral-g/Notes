@@ -33,7 +33,6 @@ C++ 去不允许 void* 隐式转换成其他指针类型。
 ```c++
 int main() {
     int *a = (void*)0; // error: cannot initialize a variable of type 'int *' with an rvalue of type 'void *'
-    return 0;
 }
 ```
 
@@ -70,8 +69,7 @@ void main() {
 nullptr 的实现：
 
 ```c++
-struct nullptr_t
-{
+struct nullptr_t {
     void operator&() const = delete;
     
     template <class T>

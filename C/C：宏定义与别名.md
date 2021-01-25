@@ -18,8 +18,6 @@ typedef char *pStr;  // typedef char* pStr;
 pStr p1;
 ```
 
-推荐使用 C++11 的新特性：using 定义别名，如 `using pStr = char*;`
-
 2. 与结构结合使用
 
 ```c

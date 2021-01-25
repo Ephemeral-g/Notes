@@ -4,25 +4,21 @@
 
 ```c
 #include <stdio.h>
-typedef struct _TEST_1
-{
+typedef struct _TEST_1 {
     int a;
     int b;
     char *c;
 }TEST_1;
 
-typedef struct _TEST_2
-{
+typedef struct _TEST_2 {
     int a;
     int b;
     char c[];
 }TEST_2;
 
-int main()
-{
+int main() {
     printf("sizeof(struct _TEST_1) = %d\n",sizeof(TEST_1));
     printf("sizeof(struct _TEST_2) = %d\n",sizeof(TEST_2));
-    return 0;
 }
 ```
 
@@ -42,8 +38,7 @@ int main()
 如果数组最终一个元素都没有的话，那么访问这个数组将会是未定义行为了。
 
 ```c
-typedef struct _TEST_2
-{
+typedef struct _TEST_2 {
     int a;
     int b;
     char c[];
@@ -106,9 +101,8 @@ memcpy(t2_2, t2, sizeof(TEST_2) + sizeof(char) * 16);
 
 与柔性数组功能类似，还有一个0长数组，不过它并不是标准中的，但是它可以实现类似的功能，使用方式如下：
 
-```
-typedef struct _TEST_3
-{
+```c
+typedef struct _TEST_3 {
     int a;
     int b;
     char c[0];

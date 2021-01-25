@@ -28,9 +28,9 @@ int *(func)(int a,int b)
 int (*func)(int a,int b)
 ```
 
-**（\*func）** 说明 func 是一个指针，然后后面跟着**（）**说明这个指针指向一个函数，即指向函数的指针。
+**（\*func）**说明 func 是一个指针，然后后面跟着**（）**说明这个指针指向一个函数，即指向函数的指针。
 
-- **函数指针：** 首先是一个指针，这个指针指向一个函数
+- **函数指针：**首先是一个指针，这个指针指向一个函数
 - **指针函数：**首先是一个函数，这个函数的返回值一个指针
 
 ### 用typedef声明一个函数指针
@@ -53,24 +53,20 @@ PF pfunc;
 
 typedef int(*PF)(int, int);
 
-int add(int a, int b)
-{
+int add(int a, int b) {
     return a+b;
 }
 
-int sub(int a, int b)
-{
+int sub(int a, int b) {
     return a-b;
 }
 
-int main()
-{
+void main() {
     PF pfunc = NULL;
     pfunc = add;
     printf("add(3, 4): %d\n", pfunc(3, 4));
     pfunc = sub;
     printf("sub(3, 4): %d\n", pfunc(3, 4));
-    return 0;
 }
 ```
 
@@ -94,16 +90,13 @@ void (*f[])(char *)
 
 void (*f[3])(char *);
 
-void print(char* s)
-{
+void print(char* s) {
     printf("%s\n", s);
 }
 
-int main()
-{
+void main() {
     f[0] = print;
     (*f[0])("hello world");
-    return 0;
 }
 ```
 
@@ -125,17 +118,14 @@ void (*p)();
 ```c
 #include <stdio.h>
 
-void Func()
-{
+void Func() {
     printf("Call Func!\n");
 }
 
-int main()
-{
+int main() {
     void(*p)();
     *(int*)&p = (int)Function;
     (*p)();
-    return 0;
 }
 ```
 
@@ -157,26 +147,22 @@ Call Func!
 #include <stdio.h>
 #include <string.h>
 
-char* func1(char* p)
-{
+char* func1(char* p) {
     printf("%s\n", p);
     return p;
 }
 
-char* func2(char* p)
-{
+char* func2(char* p) {
     printf("%s\n", p);
     return p;
 }
 
-char* func3(char* p)
-{
+char* func3(char* p) {
     printf("%s\n", p);
     return p;
 }
 
-int main()
-{
+int main() {
     char* (*pf[3])(char * p);
     pf[0] = fun1;  // 可以直接用函数名
     pf[1] = &fun2; // 可以用函数名加上取地址符
@@ -185,7 +171,5 @@ int main()
     pf[0]("fun1");
     pf[0]("fun2");
     pf[0]("fun3");
-
-    return 0;
 }
 ```

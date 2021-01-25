@@ -80,18 +80,15 @@ int *q = const_cast<int*>(p);
 指针 p 和指针 q 都是指向 a 变量的地址，p 和 q 的值都是20，而 a 的值也是20。
 
 ```c++
-const int* Search(const int* a, int n, int val)
-{
-    for (int i = 0; i < n; ++i)
-    {
+const int* Search(const int* a, int n, int val) {
+    for (int i = 0; i < n; ++i) {
         if (a[i] == val)
             return &a[i];
     }
     return nullptr;
 }
 
-void main()
-{
+void main() {
     int a[10] = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9};
     int *p = const_cast<int*>(Search(a, 10, 5));
 }
@@ -100,18 +97,15 @@ void main()
 定义了一个函数，用于在 a 数组中寻找 val 值，如果找到了就返回该值的地址，如果没有找到则返回 nullptr。函数 Search 返回值是 const 指针，当 a 数组中找到了 val 值的时候，返回 val 的地址，最关键的是 a 数组在 main 函数中并不是 const，因此即使去掉返回值的常量性有可能会造成 a 数组被修改，但是这也依然是安全的。
 
 ```c++
-const int& Search(const int* a, int n, int val)
-{
-    for (int i = 0; i < n; ++i)
-    {
+const int& Search(const int* a, int n, int val) {
+    for (int i = 0; i < n; ++i) {
         if (a[i] == val)
             return a[i];
     }
     return nullptr;
 }  
 
-void main()
-{
+void main() {
     int a[10] = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9};
     int &p = const_cast<int&>(Search(a, 10, 5));
 }            
@@ -164,22 +158,19 @@ dynamic_cast<type>(expression)
 在 C++ 中，编译期的类型转换有可能会在运行时出现错误，特别是涉及到类对象的指针或引用操作时，更容易产生错误。dynamic_cast 操作符则可以在运行期对可能产生问题的类型转换进行测试。
 
 ```c++
-class base
-{
+class Base {
 public:
     void m() { cout << "m" << endl; }
 };
 
-class derived : public base
-{
+class Derived : public Base {
 public:
     void f() { cout << "f" << endl; }
 };
 
-int main()
-{
-    derived *p = new base;
-    p = staic_cast<derived*>(new base);
+int main() {
+    Derived *p = new Base;
+    p = staic_cast<Derived*>(new Base);
     p->m();
     p->f();
 }    
@@ -196,22 +187,19 @@ int main()
 当然 dynamic_cast 使用起来也是有条件的，它要求所转换的操作数必须包含多态类类型(即至少包含一个虚函数的类)。
 
 ```c++
-class base
-{
+class Base {
 public:
     void m() { cout << "m" << endl; }
 };
 
-class derived : public base
-{
+class Derived : public Base {
 public:
     void f() { cout << "f" << endl; }
 };
 
-int main()
-{
-    derived *p = new base;
-    p = dynamic_cast<derived*>(new base);
+void main() {
+    Derived *p = new Base;
+    p = dynamic_cast<Derived*>(new Base);
     p->m();
     p->f();
 }
