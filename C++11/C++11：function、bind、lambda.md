@@ -23,10 +23,11 @@ auto func = [capture] (params) opt -> ret { func_body; };
 ```c++
 auto func1 = [](int a) -> int { return a + 1; };
 auto func2 = [](int a) { return a + 2; };
+auto func3 = [] {return 1};  // 省略空参数列表
 std::cout << func1(1) << " " << func2(2) << std::endl;
 ```
 
-很多时候 lambda 表达式返回值是很明显的，C++11 允许省略表达式的返回值定义。
+很多时候 lambda 表达式返回值是很明显的，C++11 允许省略表达式的返回值定义。在没有参数列表的时候，参数列表可以省略。
 
 lambda 表达式允许捕获一定范围内的变量：
 
@@ -69,6 +70,14 @@ int main() {
 ![img](./Photo/lambda.png)
 
 从结果发现，func1() 的结果为 0，因为 lambda 表达式对与值捕获的情况，在 lambda 表达式创建之时，就已经获取了相关变量的值，而不是在调用时获取。
+
+对于没有捕获任何变量的 lambda 表达式，还可以被转换成一个普通的函数指针。
+
+```c++
+using func_t = int(*)(int);
+func_t f = [](int a){ return a; };
+f(123);
+```
 
 ## 二、std::bind
 
@@ -132,6 +141,16 @@ int main() {
 
 	// 智能指针亦能用于调用被引用对象的成员
 	std::cout << "f4: " << f4(std::make_shared<Test>(t)) << std::endl;
+
+    std::vector<int> vec;
+
+    // 查找元素值大于10的元素个数
+    int count = std::count_if(vec.begin(), vec.end(), std::bind(less<int>(), 10, _1));
+
+    // 查找元素值小于10的元素个数
+    count = std::count_if(vec.begin(), vec.end(), std::bind(less<int>(), _1, 10));
+
+    return 0;
 }
 ```
 
